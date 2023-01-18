@@ -37,9 +37,13 @@ namespace DutchTreat.Repositories
 				_logger.LogError("Utilisateur deja dans le systeme !");
 			}
 		}
-        public IEnumerable<Order> FindAllOrders()
+        public IEnumerable<Order> FindAllOrders(bool IncludeItems)
         {
+			if (IncludeItems)
+			{
 			return _context.Orders.Include(o => o.Items).ThenInclude(i => i.Product).OrderBy(p => p.OrderDate);
+			}
+            return _context.Orders.OrderBy(p => p.OrderDate);
         }
         public Product FindProductById(int id)
         {

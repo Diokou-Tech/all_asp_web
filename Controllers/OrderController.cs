@@ -21,9 +21,9 @@ namespace DutchTreat.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(bool includeItems = true)
         {
-            return Ok( _mapper.Map<IEnumerable<OrderDto>>(_repo.FindAllOrders()) );
+            return Ok( _mapper.Map<IEnumerable<OrderDto>>(_repo.FindAllOrders(includeItems)) );
         }
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)

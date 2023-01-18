@@ -10,7 +10,8 @@ namespace DutchTreat.Dtos
         {
             CreateMap<Order, OrderDto>()
                 .ForMember(o => o.OrderId, e => e.MapFrom( e => e.Id))
-                .ReverseMap();   
+                .ReverseMap();
+            CreateMap<OrderItem, OrderItemDto>().ReverseMap();
         }
     }
 }

@@ -12,7 +12,8 @@ namespace DutchTreat
     public static void Main(string[] args)
     {
         var host = CreateHostBuilder(args).Build();
-            if(args.Length == 1 && args[0].ToLower() == "seed")
+            var isSeed = args.Length == 1 && args[0].ToLower() == "seed";
+            if (isSeed)
             {
             RunSeed(host);
             }

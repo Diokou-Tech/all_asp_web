@@ -11,7 +11,8 @@ namespace DutchTreat.Dtos
             CreateMap<Order, OrderDto>()
                 .ForMember(o => o.OrderId, e => e.MapFrom( e => e.Id))
                 .ReverseMap();
-            CreateMap<OrderItem, OrderItemDto>().ReverseMap();
+            CreateMap<OrderItem, OrderItemDto>()
+                .ReverseMap();
         }
     }
 }

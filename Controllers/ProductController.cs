@@ -1,6 +1,8 @@
 ﻿using DutchTreat.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace DutchTreat.Controllers
 {
@@ -20,6 +22,7 @@ namespace DutchTreat.Controllers
         {
             return Ok(_repo.FindAll());
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id:int}")]
         public ActionResult Get(int id)
         {

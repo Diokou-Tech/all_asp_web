@@ -1,10 +1,11 @@
 ﻿using DutchTreat.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace DutchTreat.Data
 {
-	public class DBContextDutch :DbContext 
+	public class DBContextDutch :IdentityDbContext<StoreUser>
 	{
 		private readonly IConfiguration _config;
 		public DBContextDutch(IConfiguration config)
@@ -14,8 +15,7 @@ namespace DutchTreat.Data
 		// definir les tables
 		public DbSet<Product> Products{ get; set; }
 		public DbSet<Order> Orders { get; set; }
-		public DbSet<OrderItem> OrderItems { get; set; }
-
+		public DbSet<OrderItem> OrderItems { get; set; } 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			base.OnConfiguring(optionsBuilder);

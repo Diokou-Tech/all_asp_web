@@ -1,16 +1,18 @@
-﻿using DutchTreat.Repositories;
-using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
 using DutchTreat.Data.Entities;
 using DutchTreat.Dtos;
+using DutchTreat.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace DutchTreat.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrderController : ControllerBase
     {
         private readonly IDutchRepository _repo;

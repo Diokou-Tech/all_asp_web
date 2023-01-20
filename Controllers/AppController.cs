@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DutchTreat.Data;
-using DutchTreat.Repositories;
+﻿using DutchTreat.Repositories;
 using DutchTreat.Services;
 using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DutchTreat.Controllers
 {
-  public class AppController : Controller
+    public class AppController : Controller
   {
     private readonly IMailService _mailService;
 	private readonly IDutchRepository _context;
@@ -24,12 +20,12 @@ namespace DutchTreat.Controllers
     {
       return View();
     }
-    [HttpGet("contact")]
+        [Authorize]
+        [HttpGet("contact")]
     public IActionResult Contact()
     {
       return View();
     }
-
     [HttpPost("contact")]
     public IActionResult Contact(ContactViewModel model)
     {
@@ -47,7 +43,8 @@ namespace DutchTreat.Controllers
     {
       return View();
     }
-    public IActionResult Shop()
+		[Authorize]
+		public IActionResult Shop()
     {
             //var results = _context.Products.OrderBy(p => p.Title).ToList();
             var result = _context.FindAll();

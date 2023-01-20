@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using DutchTreat.Data.Entities;
 using DutchTreat.Dtos;
 using DutchTreat.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +11,7 @@ namespace DutchTreat.Controllers
 {
     [ApiController]
     [Route("api/orders/{orderId}/items")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrderItemController : ControllerBase
     { 
         private readonly IDutchRepository _repo;

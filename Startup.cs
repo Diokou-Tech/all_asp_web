@@ -1,9 +1,11 @@
-using AutoMapper;
+﻿using AutoMapper;
 using DutchTreat.Data;
+using DutchTreat.Data.Entities;
 using DutchTreat.Repositories;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
@@ -20,6 +22,12 @@ namespace DutchTreat
             services.AddDbContext<DBContextDutch>();
             services.AddTransient<DutchSeeder>();
             services.AddScoped<IDutchRepository, DutchRepository>();
+            // configurer identity  et specifier le context à utiliser
+            services.AddIdentity<StoreUser, IdentityRole>( config =>
+            {
+                config.User.RequireUniqueEmail= true;
+            }).AddEntityFrameworkStores<DBContextDutch>();
+            services.AddAuthentication().AddCookie().AddJwtBearer();
             // configurer les vues,mvc, serialisation json boucle recursive 
             services.AddControllersWithViews()  
               .AddRazorRuntimeCompilation()
@@ -40,11 +48,10 @@ namespace DutchTreat
         // Add Error Page
         app.UseExceptionHandler("/error");
       }
-
       app.UseStaticFiles();
-
       app.UseRouting();
-
+      app.UseAuthentication();
+      app.UseAuthorization();
       app.UseEndpoints(cfg =>
       {
         cfg.MapControllerRoute("Fallback",

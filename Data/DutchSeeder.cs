@@ -14,20 +14,19 @@ namespace DutchTreat.Data
 	{
 		private readonly DBContextDutch _context;
 		private readonly IWebHostEnvironment _env;
-        private readonly UserManager<StoreUser> _userManager;
-
-        public DutchSeeder(DBContextDutch context, IWebHostEnvironment env, UserManager<StoreUser> userManager)
+		private readonly UserManager<StoreUser> _userManager;
+		public DutchSeeder(DBContextDutch context, IWebHostEnvironment env, UserManager<StoreUser> userManager)
 		{
 			_context = context;
 			_env = env;
-            _userManager = userManager;
-        }
+			_userManager = userManager;
+		}
 		public async Task SeedAsync()
-		{  
-				// verifier que la base de données existe 
+		{
+			// verifier que la base de données existe 
 			_context.Database.EnsureCreated();
-            // creation user
-            StoreUser user = await _userManager.FindByEmailAsync("diokoutech@gmail.com");
+			// creation user
+			StoreUser user = await _userManager.FindByEmailAsync("diokoutech@gmail.com");
 			if (user is null)
 			{
 				user = new StoreUser()
@@ -38,15 +37,15 @@ namespace DutchTreat.Data
 					UserName = "diokoutech@gmail.com",
 				};
 			}
-			IdentityResult result = await _userManager.CreateAsync(user,"@1996Diokou");
-			if(result != IdentityResult.Success)
+			IdentityResult result = await _userManager.CreateAsync(user, "@1996Diokou");
+			if (result != IdentityResult.Success)
 			{
 				throw new Exception("Erreur creation de l'utilisateur !");
 			}
 			if (!_context.Products.Any())
-			 {
+			{
 				// seed datas in database
-				var filePath = Path.Combine(_env.ContentRootPath,"Data/art.json"); 
+				var filePath = Path.Combine(_env.ContentRootPath, "Data/art.json");
 				var json = File.ReadAllText(filePath);
 				var products = JsonSerializer.Deserialize<IEnumerable<Product>>(json);
 				//IEnumerable<Product> produ cts = JsonSerializer.Deserialize<IEnumerable<Product>>(json);
@@ -56,7 +55,7 @@ namespace DutchTreat.Data
 				{
 					OrderDate = DateTime.Today,
 					OrderNumber = "10002",
-					User= user,
+					User = user,
 					Items = new List<OrderItem>()
 					{
 						new OrderItem()
@@ -67,7 +66,7 @@ namespace DutchTreat.Data
 						}
 					}
 				};
-				_context.Orders.Add( order );	
+				_context.Orders.Add(order);
 				// Persist DB
 				_context.SaveChanges();
 			}

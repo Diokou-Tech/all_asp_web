@@ -1,0 +1,9 @@
+﻿{
+    "include" : ["wwwroot/ts/**/*.ts"],
+    "compileOnSave" : true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es6",
+    "sourceMap": true
+  }
+}

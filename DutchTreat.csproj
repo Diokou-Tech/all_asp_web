@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="tscofnig.json" />
+    <Content Remove="tsconfig.json" />
     <Content Remove="wwwroot\ts\Main.ts" />
   </ItemGroup>
 
@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="tscofnig.json" />
+    <TypeScriptCompile Include="tsconfig.json" />
     <TypeScriptCompile Include="wwwroot\ts\Main.ts" />
   </ItemGroup>
 </Project>

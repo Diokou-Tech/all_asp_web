@@ -16,6 +16,7 @@ namespace DutchTreat.Data
 		public DbSet<Product> Products{ get; set; }
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderItem> OrderItems { get; set; } 
+		// config chemin de la base de donnée
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			base.OnConfiguring(optionsBuilder);

@@ -6,7 +6,13 @@
   "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "Microsoft" :  "Warning"
+      "Microsoft": "Warning"
     }
-  }
+  },
+  "Token": {
+    "Key": "DiokoutechKey@DiokouZola",
+    "Host_Client": "http://localhost:8888",
+    "Host_App": "http://localhost:8888"
+  },
+  "AllowedHosts": "*"
 } 
